@@ -2,26 +2,22 @@ package bankacctapp;
 
 public abstract class Account implements IBaseRate {
 	//List common properties for saving and checking accounts
-	String name;
-	String sSN;
-	double balance;
+	private String name;
+	private String sSN;
+	private double balance;
 	
-	static int index = 10000;
-	String accountNumber;
-	double rate;
+	private static int index = 10000;
+	protected String accountNumber;
+	protected double rate;
 	
 	
 	//Constructor to set base properties and initialize the account
-	public Account(String name, String sSN,double initDeposit) {
+	public Account(String name, String sSN, double initDeposit) {
+		index++;
 		this.name = name;
 		this.sSN = sSN;
-		balance = initDeposit;
-		//System.out.println("Name:" +name + " SSN: " +sSN+ " balance: "+balance);
-		
-		//Set account number
-		index++;
+		this.balance = initDeposit;
 		this.accountNumber = setAccountNumber();
-		
 		setRate();
 	}
 	
@@ -39,7 +35,7 @@ public abstract class Account implements IBaseRate {
 		double accruedInterest = balance * (rate/100);
 		balance = balance + accruedInterest;
 		System.out.println("Accrued Interest: $" + accruedInterest);
-		
+		printBalance();
 	}
 	
 	//List common methods - transactions
